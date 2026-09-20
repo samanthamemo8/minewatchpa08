@@ -13,4 +13,4 @@
 - [x] Build shared header and three-tab navigation
 - [x] Reorganize dashboard, reporting, and legislative content
 - [x] Add depth-based groundwater scoring and expanded report fields
-- [ ] Update print behavior and validate all responsive views
+- [x] Update print behavior and validate all responsive views
