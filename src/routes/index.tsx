@@ -194,6 +194,9 @@ function MineWatchDashboard() {
   return (
     <main className="min-h-screen text-foreground">
       <div className="mx-auto max-w-[1600px] px-4 py-5 sm:px-6 lg:px-8">
+        <div className="print-only hidden border-b border-border pb-4">
+          <div className="flex items-center justify-between"><div><h1 className="text-2xl font-bold">Mine<span className="text-safety">Watch</span></h1><p className="font-mono text-[9px] uppercase text-muted-foreground">Homeowner Subsidence Risk Briefing · PA-08</p></div><HardHat className="size-8 text-safety" /></div>
+        </div>
         <header className="no-print mine-panel relative rounded-lg border border-border p-4 sm:p-5">
           {architecture && <ArchitectureBadge>{"<StateProvider />"}</ArchitectureBadge>}
           <div className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-border pb-4">
