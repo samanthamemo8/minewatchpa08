@@ -10,7 +10,7 @@
 
 ## Multi-view architecture
 
-- [ ] Build shared header and three-tab navigation
-- [ ] Reorganize dashboard, reporting, and legislative content
-- [ ] Add depth-based groundwater scoring and expanded report fields
+- [x] Build shared header and three-tab navigation
+- [x] Reorganize dashboard, reporting, and legislative content
+- [x] Add depth-based groundwater scoring and expanded report fields
 - [ ] Update print behavior and validate all responsive views
