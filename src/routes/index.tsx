@@ -209,7 +209,6 @@ function DistrictDashboardView({ profile, zip, setZip, rainfall, setRainfall, di
         {architecture && <ArchitectureBadge>{"<DistrictSelector />"}</ArchitectureBadge>}
         <div className="grid gap-4 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end"><DistrictSelector zip={zip} onChange={setZip} /><div className="flex items-center gap-2 text-xs text-muted-foreground"><Radio className="signal-pulse size-3 text-risk-low" /><span>District sensor network online</span></div></div>
       </section>
-      <PropertyVerification zip={zip} architecture={architecture} />
       <section className="flex items-center justify-between border-y border-border py-3">
         <div className="flex min-w-0 items-center gap-2"><MapPin className="size-4 shrink-0 text-safety" /><p className="truncate text-sm font-semibold">{profile.place}, Pennsylvania <span className="font-normal text-muted-foreground">· ZIP {zip}</span></p></div>
         <Badge variant="outline" className={cn("shrink-0", meta.badge)}>{meta.label.toUpperCase()}</Badge>
