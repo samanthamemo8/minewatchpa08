@@ -17,7 +17,6 @@ import {
   Landmark,
   Layers3,
   MapPin,
-  LoaderCircle,
   Moon,
   Phone,
   Sun,
@@ -200,36 +199,6 @@ function TrendChart({ values }: { values: number[] }) {
 
 function DistrictSelector({ zip, onChange }: { zip: ZipCode; onChange: (zip: ZipCode) => void }) {
   return <div className="max-w-2xl"><Label className="mb-2 block text-xs text-ink-soft">Select PA-08 Zip Code to Check Subsidence Risk</Label><Select value={zip} onValueChange={(value) => onChange(value as ZipCode)}><SelectTrigger className="h-12 border-border bg-secondary/60 text-base"><SelectValue /></SelectTrigger><SelectContent>{Object.values(profiles).map((item) => <SelectItem key={item.zip} value={item.zip}>{item.zip} — {item.place}</SelectItem>)}</SelectContent></Select></div>;
-}
-
-function PropertyVerification({ zip, architecture }: { zip: ZipCode; architecture: boolean }) {
-  const [address, setAddress] = useState("");
-  const [status, setStatus] = useState<"idle" | "scanning" | "verified">("idle");
-  const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
-  const id = useId();
-  useEffect(() => {
-    setStatus("idle");
-    return () => clearTimeout(timer.current);
-  }, [zip]);
-  const scan = (event: React.FormEvent) => {
-    event.preventDefault();
-    if (address.trim().length < 5 || status === "scanning") return;
-    clearTimeout(timer.current);
-    setStatus("scanning");
-    timer.current = setTimeout(() => setStatus("verified"), 1500);
-  };
-  return <section className="relative border-y border-border py-5">
-    {architecture && <ArchitectureBadge>{"<PropertyVerification />"}</ArchitectureBadge>}
-    <form onSubmit={scan} className="max-w-2xl">
-      <Label htmlFor={id} className="mb-2 block">Verify Local Property Address</Label>
-      <div className="flex items-center gap-3"><Input id={id} required minLength={5} maxLength={100} placeholder="Street number and name" value={address} disabled={status === "scanning"} onChange={(event) => { setAddress(event.target.value); setStatus("idle"); }} className="h-11 border-border bg-secondary/60" /><Button type="submit" size="icon" className="size-11 shrink-0" disabled={status === "scanning"} aria-label="Verify address" title="Verify address">{status === "scanning" ? <LoaderCircle className="animate-spin" /> : <MapPin />}</Button></div>
-      <div className="mt-3 min-h-10" role="status" aria-live="polite">
-        {status === "scanning" && <p className="flex items-center gap-2 text-sm text-muted-foreground"><LoaderCircle className="size-4 animate-spin" />Engineering scan in progress…</p>}
-        {status === "verified" && <Badge variant="outline" className="view-enter max-w-full whitespace-normal border-risk-low/40 bg-risk-low/10 px-3 py-2 text-risk-low">✓ Address Verified Within PA Anthracite Region Boundary</Badge>}
-      </div>
-      <p className="text-xs text-muted-foreground">Simulated boundary screening · not an official property assessment.</p>
-    </form>
-  </section>;
 }
 
 function DistrictDashboardView({ profile, zip, setZip, rainfall, setRainfall, displayScore, architecture }: { profile: Profile; zip: ZipCode; setZip: (zip: ZipCode) => void; rainfall: boolean; setRainfall: (value: boolean) => void; displayScore: number; architecture: boolean }) {
