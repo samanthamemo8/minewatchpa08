@@ -14,3 +14,10 @@
 - [x] Reorganize dashboard, reporting, and legislative content
 - [x] Add depth-based groundwater scoring and expanded report fields
 - [x] Update print behavior and validate all responsive views
+
+## Competition refinements
+- [ ] Animate ZIP-specific chart shapes and add the dial groundwater alert
+- [ ] Add simulated address scanning and verification badge
+- [ ] Add live, newest-first district dispatches and clear submitted fields
+- [ ] Add MSI hotline and high-contrast light mode
+- [ ] Verify all new interactions and preview health
