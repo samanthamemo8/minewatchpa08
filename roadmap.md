@@ -16,8 +16,8 @@
 - [x] Update print behavior and validate all responsive views
 
 ## Competition refinements
-- [ ] Animate ZIP-specific chart shapes and add the dial groundwater alert
-- [ ] Add simulated address scanning and verification badge
-- [ ] Add live, newest-first district dispatches and clear submitted fields
-- [ ] Add MSI hotline and high-contrast light mode
-- [ ] Verify all new interactions and preview health
+- [x] Animate ZIP-specific chart shapes and add the dial groundwater alert
+- [x] Add simulated address scanning and verification badge
+- [x] Add live, newest-first district dispatches and clear submitted fields
+- [x] Add MSI hotline and high-contrast light mode
+- [x] Verify all new interactions and preview health
