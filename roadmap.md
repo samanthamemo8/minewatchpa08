@@ -21,3 +21,10 @@
 - [x] Add live, newest-first district dispatches and clear submitted fields
 - [x] Add MSI hotline and high-contrast light mode
 - [x] Verify all new interactions and preview health
+
+## National infrastructure polish
+- [ ] Add three national fields with nine regional profiles and dynamic analytics
+- [ ] Adapt reporting, dispatches, policy guidance, and contacts to the active field
+- [ ] Add simulated USGS sync and dashboard refresh animation
+- [ ] Replace favicon and header branding with the orange pickaxe
+- [ ] Add national stats and verify regional flows, print, and mobile layouts
