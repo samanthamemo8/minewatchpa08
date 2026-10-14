@@ -7,12 +7,10 @@ import {
   ArrowUpRight,
   Building2,
   CheckCircle2,
-  ChevronRight,
   CircleGauge,
   ClipboardCheck,
   CloudRain,
   FileDown,
-  HardHat,
   History,
   Landmark,
   Layers3,
@@ -23,7 +21,6 @@ import {
   Radio,
   Send,
   ShieldCheck,
-  Pickaxe,
   Network,
   LoaderCircle,
 } from "lucide-react";
@@ -279,6 +276,7 @@ function LegislativeView({ field, profile, architecture, score }: { field: Minin
       <div className="border-t border-border pt-4"><h3 className="text-sm font-semibold">{field.id === "pa" ? "PA Mine Subsidence Insurance" : "State hazard mitigation review"}</h3><p className="mt-2 text-xs leading-6 text-muted-foreground">{field.program}</p></div>
       <Button asChild variant="outline" className="h-auto w-full justify-between whitespace-normal py-3 text-left"><a href={field.resourceUrl} target="_blank" rel="noreferrer">{field.resourceTitle}<ArrowUpRight className="size-4 shrink-0 text-safety"/></a></Button>
       <Button asChild variant="outline" className="h-auto w-full justify-start whitespace-normal border-safety/50 py-3 text-left text-safety"><a href={`tel:${field.telephone}`}><Phone className="size-4 shrink-0"/>{field.hotline}</a></Button>
+      {field.protectionUrl && <Button asChild variant="outline" className="h-auto w-full justify-between whitespace-normal py-3 text-left"><a href={field.protectionUrl} target="_blank" rel="noreferrer">{field.id === "wv" ? "WV BRIM Mine Subsidence Insurance" : "CO Mine Subsidence Protection · coal eligibility"}<ArrowUpRight className="size-4 shrink-0 text-safety"/></a></Button>}
       {field.id === "pa" && <a href="tel:8883572674" className="block text-xs text-muted-foreground">Mine Subsidence Assistance · 1-888-357-2674</a>}
       <p className="flex items-center gap-2 text-xs text-muted-foreground"><CheckCircle2 className="size-4 shrink-0 text-risk-low"/>Official {field.state} resource links · agency determines eligibility</p></CardContent>
     </Card>
