@@ -73,13 +73,13 @@
 
 :root {
   --radius: 0.5rem;
-  --background: oklch(0.17 0.014 250);
+  --background: oklch(0.218 0 0);
   --foreground: oklch(0.96 0.008 85);
   --card: oklch(0.24 0.016 248 / 82%);
   --card-foreground: oklch(0.96 0.008 85);
   --popover: oklch(0.22 0.016 248);
   --popover-foreground: oklch(0.96 0.008 85);
-  --primary: oklch(0.7 0.19 46);
+  --primary: oklch(0.696 0.204 43.5);
   --primary-foreground: oklch(0.16 0.014 250);
   --secondary: oklch(0.3 0.019 248);
   --secondary-foreground: oklch(0.92 0.008 85);
@@ -91,10 +91,10 @@
   --destructive-foreground: oklch(0.984 0.003 247.858);
   --border: oklch(0.42 0.022 246 / 62%);
   --input: oklch(0.38 0.02 247);
-  --ring: oklch(0.7 0.19 46);
+  --ring: oklch(0.696 0.204 43.5);
   --panel: oklch(0.235 0.017 248 / 76%);
   --panel-strong: oklch(0.285 0.02 248 / 94%);
-  --safety: oklch(0.7 0.19 46);
+  --safety: oklch(0.696 0.204 43.5);
   --safety-foreground: oklch(0.16 0.014 250);
   --risk-low: oklch(0.72 0.15 155);
   --risk-moderate: oklch(0.82 0.16 87);
@@ -259,3 +259,9 @@
   [data-state="inactive"] { display: none !important; }
   .print-break-avoid { break-inside: avoid; }
 }
+
+@keyframes telemetry-refresh {
+  0%, 100% { opacity: 1; filter: brightness(1); }
+  35% { opacity: 0.55; filter: brightness(1.4); }
+}
+@utility telemetry-refresh { animation: telemetry-refresh 650ms ease-out; }
