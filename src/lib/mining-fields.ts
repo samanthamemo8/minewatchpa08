@@ -7,7 +7,7 @@ export type Profile = {
 export type MiningField = {
   id: FieldId; name: string; region: string; state: string; district: string;
   agency: string; funding: string; hotline: string; telephone: string;
-  resourceTitle: string; resourceUrl: string; program: string; geology: string;
+  resourceTitle: string; resourceUrl: string; protectionUrl?: string; program: string; geology: string;
   profiles: Profile[]; samples: string[];
 };
 const guidance = (score: number, agency: string) => [
@@ -36,8 +36,9 @@ export const miningFields: Record<FieldId, MiningField> = {
     id: 'wv', name: 'Central Bituminous Belt', region: 'West Virginia', state: 'West Virginia', district: 'WV-02', agency: 'WV DEP AML', geology: 'bituminous coal',
     funding: 'WV Regional Allocation: $2.1 Billion allocated for acid mine drainage and regional subsidence buffering.',
     hotline: 'Call WV DEP AML Office (304-926-0499)', telephone: '3049260499',
-    resourceTitle: 'WV DEP Abandoned Mine Lands', resourceUrl: 'https://dep.wv.gov/aml/Pages/default.aspx',
-    program: 'WV DEP AML evaluates legacy mine hazards and eligible reclamation sites. No PA-style insurance eligibility is inferred; ask the agency about site review and available mitigation programs.',
+    resourceTitle: 'WV DEP Abandoned Mine Lands', resourceUrl: 'https://dep.wv.gov/dlr/aml/Pages/default.aspx',
+    protectionUrl: 'https://brim.wv.gov/claim/Pages/Mine-Subsidence.aspx',
+    program: 'WV DEP AML reviews mine hazards. For mine subsidence insurance, contact your insurer and WV BRIM about existing policy coverage, exclusions, and claims; a pilot risk score does not establish eligibility. The listed WV number is DEP headquarters; request the AML office.',
     samples: ['100 block of High Street, Morgantown, WV', '200 block of Fairmont Avenue, Fairmont, WV'],
     profiles: [
       local('morgantown', 'Morgantown Commercial Core', 76, 11, 180, 'Bituminous Workings', 'Active Monitoring', [2.2,3.6,2.8,4.9,3.1,5.2,3.4,4.7,3.6,5.3,4,5.1], 'WV DEP AML'),
@@ -50,7 +51,8 @@ export const miningFields: Record<FieldId, MiningField> = {
     funding: 'CO Regional Allocation: $89 Million targeted at high-altitude abandoned hardrock shaft closures.',
     hotline: 'Call CO DRMS Reclamation Bureau (303-866-3567)', telephone: '3038663567',
     resourceTitle: 'CO Inactive Mine Reclamation', resourceUrl: 'https://drms.colorado.gov/programs/inactive-mine-reclamation-program',
-    program: 'CO DRMS reviews inactive mine hazards and reclamation priorities. Shaft closure assistance depends on site eligibility and program review; this is not an insurance quote or subsidy approval.',
+    protectionUrl: 'https://drms.colorado.gov/programs/inactive-mine-reclamation-program/mine-subsidence-protection-program',
+    program: 'CO DRMS reviews inactive mine hazards and shaft closures. Its Mine Subsidence Protection Program concerns eligible coal-mine damage, not automatic coverage for the hardrock areas modeled here. Ask DRMS for site-specific program eligibility. The listed number is DRMS general assistance.',
     samples: ['100 block of Harrison Avenue, Leadville, CO', '200 block of Pearl Street, Boulder, CO'],
     profiles: [
       local('leadville', 'Leadville Historic District', 81, 14, null, 'Unmapped Vertical Shafts', 'Fractured', [2.5,4.8,3.1,5.4,3.5,5.8,3.2,5.1,3.9,5.7,4.1,5.5], 'CO DRMS'),
