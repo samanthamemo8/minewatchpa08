@@ -23,6 +23,8 @@ import {
   ShieldCheck,
   Network,
   LoaderCircle,
+  Image as ImageIcon,
+  X,
 } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -46,7 +48,7 @@ const reportSchema = z.object({
   details: z.string().trim().min(8, "Add a brief description (at least 8 characters).").max(300, "Keep the description under 300 characters."),
 });
 
-type Dispatch = { field: FieldId; id: string; type: string; address: string; details: string; time: string; status: string };
+type Dispatch = { field: FieldId; id: string; type: string; address: string; details: string; photo?: string; time: string; status: string };
 
 const sampleDispatches = (field: MiningField): Dispatch[] => field.samples.map((address, index) => ({
   field: field.id, id: `sample-${field.id}-${index}`, address,
@@ -219,10 +221,22 @@ function ReportingView({ field, zip, architecture, dispatches, onDispatch }: { f
   const [address, setAddress] = useState("");
   const [details, setDetails] = useState("");
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const addressId = useId(), detailsId = useId();
+  const [photo, setPhoto] = useState<string | null>(null);
+  const [photoName, setPhotoName] = useState("");
+  const addressId = useId(), detailsId = useId(), photoId = useId();
   const [submitting, setSubmitting] = useState(false);
   const reportTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   useEffect(() => () => { if (reportTimer.current) clearTimeout(reportTimer.current); }, []);
+  const handlePhotoChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    if (!["image/jpeg", "image/png"].includes(file.type)) { toast.error("Unsupported Photo Format", { description: "Attach .jpg, .jpeg, or .png images only." }); return; }
+    if (file.size > 5 * 1024 * 1024) { toast.error("Photo Exceeds 5MB", { description: "Compress the structural photo and try again." }); return; }
+    const reader = new FileReader();
+    reader.onload = () => { setPhoto(typeof reader.result === "string" ? reader.result : null); setPhotoName(file.name); };
+    reader.readAsDataURL(file);
+  };
   const submitReport = (event: React.FormEvent) => {
     event.preventDefault();
     const parsed = reportSchema.safeParse({ type: observation, address, details });
@@ -231,8 +245,8 @@ function ReportingView({ field, zip, architecture, dispatches, onDispatch }: { f
     setSubmitting(true);
     reportTimer.current = setTimeout(() => {
     const id = `MW-${zip}-${Date.now()}`;
-    onDispatch({ field: field.id, id, type: parsed.data.type, address: parsed.data.address, details: parsed.data.details, time: "Just now", status: "Municipal review" });
-    setErrors({}); setObservation(""); setAddress(""); setDetails("");
+    onDispatch({ field: field.id, id, type: parsed.data.type, address: parsed.data.address, details: parsed.data.details, photo: photo ?? undefined, time: "Just now", status: "Municipal review" });
+    setErrors({}); setObservation(""); setAddress(""); setDetails(""); setPhoto(null); setPhotoName("");
     setSubmitting(false);
     toast.success("Report Successfully Synced to State AML Database", { description: `${field.agency} pilot intake · simulated transmission only.` });
     }, 700);
@@ -246,13 +260,30 @@ function ReportingView({ field, zip, architecture, dispatches, onDispatch }: { f
           <div><Label className="mb-2 block" htmlFor="observation-type">Observation Type</Label><Select value={observation} onValueChange={setObservation}><SelectTrigger id="observation-type" className="h-11 border-border bg-secondary/60"><SelectValue placeholder="Select observation type" /></SelectTrigger><SelectContent><SelectItem value="Foundation Cracks">Foundation Cracks</SelectItem><SelectItem value="Backyard Depressions">Backyard Depressions</SelectItem><SelectItem value="Shifting Sidewalks">Shifting Sidewalks</SelectItem></SelectContent></Select></div>
           <div><Label className="mb-2 block" htmlFor={addressId}>Street Address</Label><Input id={addressId} value={address} onChange={(event) => { setAddress(event.target.value); setErrors((current) => ({ ...current, address: "" })); }} placeholder="Street number and name" className="h-11 border-border bg-secondary/60" aria-invalid={Boolean(errors["address"])} /><p className="mt-1 text-xs text-risk-critical">{errors["address"]}</p></div>
           <div><div className="mb-2 flex justify-between"><Label htmlFor={detailsId}>Description</Label><span className="font-mono text-[9px] text-muted-foreground">{details.length}/300</span></div><Textarea id={detailsId} value={details} onChange={(event) => { setDetails(event.target.value.slice(0, 300)); setErrors((current) => ({ ...current, details: "" })); }} maxLength={300} rows={7} placeholder="Describe the size, location, when you first noticed it, and whether it is changing…" className="resize-none border-border bg-secondary/60" aria-invalid={Boolean(errors["details"])} /><p className="mt-1 text-xs text-risk-critical">{errors["details"]}</p></div>
+          <div><Label className="mb-2 block" htmlFor={photoId}>Upload Structural Photo (Max 5MB)</Label>
+          <label htmlFor={photoId} className="flex cursor-pointer items-center gap-4 rounded-lg border border-dashed border-border bg-secondary/40 p-4 transition-colors hover:border-safety/70">
+            {photo ? (
+              <>
+                <img src={photo} alt="Selected structural photo preview" className="size-14 shrink-0 rounded-md border border-border object-cover" />
+                <div className="min-w-0 flex-1"><p className="truncate text-xs font-medium">{photoName}</p><p className="text-[10px] text-muted-foreground">Attached · .jpg/.jpeg/.png · stays on this device</p></div>
+                <Button type="button" variant="ghost" size="sm" className="size-8 shrink-0 p-0" aria-label="Remove photo" onClick={(event) => { event.preventDefault(); setPhoto(null); setPhotoName(""); }}><X /></Button>
+              </>
+            ) : (
+              <>
+                <span className="grid size-10 shrink-0 place-items-center rounded-md border border-border bg-background/60"><ImageIcon className="size-4 text-safety" /></span>
+                <div className="min-w-0"><p className="text-xs font-medium">Attach a structural photo for engineering review</p><p className="text-[10px] text-muted-foreground">Accepted: .jpg · .jpeg · .png · max 5MB · never uploaded</p></div>
+              </>
+            )}
+          </label>
+          <input id={photoId} type="file" accept=".jpg,.jpeg,.png,image/jpeg,image/png" onChange={handlePhotoChange} className="sr-only" />
+        </div>
           <p className="text-xs text-muted-foreground">Simulated incident screening · no report is sent to a government agency.</p><p role="alert" className="text-xs text-risk-critical">{errors["type"]}</p><Button type="submit" disabled={submitting} className="h-11 w-full bg-safety text-safety-foreground hover:bg-safety/90">{submitting ? <LoaderCircle className="animate-spin"/> : <Send/>}{submitting ? "Transmitting Report…" : "Submit Report"}</Button>
         </form><div className="mt-6 grid gap-3 border-t border-border pt-5 sm:grid-cols-3">{["Local municipal review", "District engineering triage", `${field.agency} incident screening`].map((step, index) => <div key={step} className="flex items-center gap-2 text-xs"><span className="grid size-6 shrink-0 place-items-center rounded-sm border border-border font-mono text-[9px] text-safety">0{index + 1}</span><span className="text-ink-soft">{step}</span></div>)}</div></CardContent>
       </Card>
       <Card className="mine-panel relative rounded-lg border-border">
         {architecture && <ArchitectureBadge>{"<DispatchLog />"}</ArchitectureBadge>}
         <CardHeader className="border-b border-border p-5"><SectionHeading icon={History} eyebrow="Neighborhood signal" title="Recent Regional Dispatches" detail={`${field.state} · session reports and two sample dispatches`} /></CardHeader>
-        <CardContent className="p-5"><div aria-live="polite" aria-relevant="additions" className="grid gap-5 md:grid-cols-2">{dispatches.map((item, index) => <article key={item.id} className="view-enter border-l border-safety pl-4"><div className="flex items-center justify-between gap-3"><p className="text-sm font-semibold">{item.type}</p><span className="font-mono text-[9px] text-muted-foreground">#{index + 1}</span></div><p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground"><MapPin className="size-3 text-safety" />{item.address}</p><p className="mt-2 text-sm leading-6 text-ink-soft">{item.details}</p><div className="mt-3 flex items-center justify-between gap-3"><Badge variant="outline" className="border-border bg-secondary text-[9px] text-ink-soft">{item.status}</Badge><span className="text-[10px] text-muted-foreground">{item.time}</span></div></article>)}</div><div className="mt-6 flex items-center gap-2 border-t border-border pt-4 font-mono text-[9px] uppercase text-muted-foreground"><Radio className="signal-pulse size-3 text-risk-low" />{field.district} pilot intake active</div></CardContent>
+        <CardContent className="p-5"><div aria-live="polite" aria-relevant="additions" className="grid gap-5 md:grid-cols-2">{dispatches.map((item, index) => <article key={item.id} className="view-enter border-l border-safety pl-4"><div className="flex items-center justify-between gap-3"><p className="text-sm font-semibold">{item.type}</p><span className="font-mono text-[9px] text-muted-foreground">#{index + 1}</span></div><p className="mt-1 flex items-center gap-2 text-xs text-muted-foreground"><MapPin className="size-3 text-safety" />{item.address}</p><div className="mt-2 flex items-start gap-3"><p className="text-sm leading-6 text-ink-soft">{item.details}</p>{item.photo ? <img src={item.photo} alt={`Structural photo for ${item.address}`} className="size-16 shrink-0 rounded-md border border-border object-cover" /> : <span className="grid size-16 shrink-0 place-items-center rounded-md border border-dashed border-border bg-secondary/50 px-1 text-center font-mono text-[8px] uppercase leading-tight text-muted-foreground">No Media Attached</span>}</div><div className="mt-3 flex items-center justify-between gap-3"><Badge variant="outline" className="border-border bg-secondary text-[9px] text-ink-soft">{item.status}</Badge><span className="text-[10px] text-muted-foreground">{item.time}</span></div></article>)}</div><div className="mt-6 flex items-center gap-2 border-t border-border pt-4 font-mono text-[9px] uppercase text-muted-foreground"><Radio className="signal-pulse size-3 text-risk-low" />{field.district} pilot intake active</div></CardContent>
       </Card>
     </div>
   );
