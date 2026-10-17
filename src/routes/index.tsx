@@ -48,7 +48,7 @@ const reportSchema = z.object({
   details: z.string().trim().min(8, "Add a brief description (at least 8 characters).").max(300, "Keep the description under 300 characters."),
 });
 
-type Dispatch = { field: FieldId; id: string; type: string; address: string; details: string; photo?: string; time: string; status: string };
+type Dispatch = { field: FieldId; id: string; type: string; address: string; details: string; photo?: string | undefined; time: string; status: string };
 
 const sampleDispatches = (field: MiningField): Dispatch[] => field.samples.map((address, index) => ({
   field: field.id, id: `sample-${field.id}-${index}`, address,
