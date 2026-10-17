@@ -28,3 +28,7 @@
 - [x] Add simulated USGS sync and dashboard refresh animation
 - [x] Replace favicon and header branding with the orange pickaxe
 - [x] Add national stats and verify regional flows, print, and mobile layouts
+
+## Photo-capable reporting
+- [x] Add "Upload Structural Photo (Max 5MB)" input (.jpg/.jpeg/.png) with local Base64 preview
+- [x] Attach photo data to submitted dispatches; render thumbnail or "No Media Attached" placeholder
