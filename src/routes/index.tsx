@@ -39,7 +39,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
 import { miningFields, type FieldId, type MiningField, type Profile } from "@/lib/mining-fields";
-import minewatchLogo from "@/assets/minewatch-logo.png.asset.json";
+import minewatchLogo from "@/assets/minewatch-hat.png.asset.json";
 
 type Workspace = "dashboard" | "reporting" | "legislative";
 
@@ -365,7 +365,7 @@ function MineWatchDashboard() {
       <header className="no-print mine-panel relative rounded-lg border border-border">
         {architecture && <ArchitectureBadge>{"<StateProvider />"}</ArchitectureBadge>}
         <div className="flex flex-wrap items-center justify-between gap-4 p-4 sm:p-5">
-          <div className="flex min-w-0 items-center gap-3"><img src={minewatchLogo.url} alt="MineWatch construction hat and shield" className="size-12 shrink-0 object-contain"/><div className="min-w-0"><h1 className="text-2xl font-bold">Mine<span className="text-safety">Watch</span></h1><p className="text-[11px] font-medium text-ink-soft">{field.district} District Infrastructure Pilot</p><p className="mt-1 font-mono text-[9px] uppercase text-muted-foreground">National Infrastructure Pilot</p></div></div>
+          <div className="flex min-w-0 items-center gap-3"><img src={minewatchLogo.url} alt="MineWatch construction hat" className="size-12 shrink-0 object-contain"/><div className="min-w-0"><h1 className="text-2xl font-bold">Mine<span className="text-safety">Watch</span></h1><p className="text-[11px] font-medium text-ink-soft">{field.district} District Infrastructure Pilot</p><p className="mt-1 font-mono text-[9px] uppercase text-muted-foreground">National Infrastructure Pilot</p></div></div>
           <div className="flex w-full flex-wrap items-center gap-3 lg:w-auto lg:justify-end">
             <Button variant="outline" disabled={syncing} onClick={syncFeed} title="Simulated federal telemetry refresh" className="h-auto min-h-10 max-w-full whitespace-normal border-safety/40 py-2 text-xs text-safety">{syncing ? <LoaderCircle className="size-4 shrink-0 animate-spin"/> : <Network className="size-4 shrink-0"/>}{syncing ? "Streaming Federal GIS Arrays..." : "Sync USGS Satellite Feed"}</Button>
             <div className="flex items-center gap-2"><Label htmlFor="developer-view" className="text-[10px] text-muted-foreground">Developer Architecture View</Label><Switch id="developer-view" aria-label="Developer Architecture View" checked={architecture} onCheckedChange={setArchitecture}/></div>
