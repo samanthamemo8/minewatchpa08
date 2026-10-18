@@ -16,4 +16,4 @@
 - Scope submitted dispatches by field in shared session state and derive regional samples separately so region changes preserve reports without mislabeling their locations.
 - Keep USGS telemetry and report transmission simulated in the browser with cancelable timers; never imply that pilot interactions deliver data to government services.
 - Render a dedicated analytical print view regardless of the selected tab so homeowner briefings always include the current regional model.
-- Keep the public favicon separate from the CDN-hosted header logo so browser-only artwork changes do not alter page branding.
+- Keep the public favicon and the CDN-hosted header logo as separate files, but render the same hat-only artwork in both so the browser tab and the on-page brand never diverge.

@@ -41,3 +41,7 @@
 ## Hat-only favicon and failed-resource content
 - [x] Isolate the supplied hat on a transparent favicon background without changing the header logo
 - [x] Remove information associated with failed resource links and verify all regional views
+
+## Header logo matches the favicon
+- [x] Publish the hat-only mark as the CDN header logo and drop the shield variant from the header
+- [x] Verify the header and browser tab show identical hat artwork on transparent backgrounds
