@@ -37,3 +37,7 @@
 - [x] Use Sierra's supplied construction-hat-and-shield image for logo and favicon
 - [x] Audit resource links and remove six error destinations
 - [x] Verify branding and both retained web links in the browser
+
+## Hat-only favicon and failed-resource content
+- [ ] Isolate the supplied hat on a transparent favicon background without changing the header logo
+- [ ] Remove information associated with failed resource links and verify all regional views
