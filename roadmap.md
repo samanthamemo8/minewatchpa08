@@ -39,5 +39,5 @@
 - [x] Verify branding and both retained web links in the browser
 
 ## Hat-only favicon and failed-resource content
-- [ ] Isolate the supplied hat on a transparent favicon background without changing the header logo
-- [ ] Remove information associated with failed resource links and verify all regional views
+- [x] Isolate the supplied hat on a transparent favicon background without changing the header logo
+- [x] Remove information associated with failed resource links and verify all regional views
