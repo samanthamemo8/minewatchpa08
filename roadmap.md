@@ -32,3 +32,8 @@
 ## Photo-capable reporting
 - [x] Add "Upload Structural Photo (Max 5MB)" input (.jpg/.jpeg/.png) with local Base64 preview
 - [x] Attach photo data to submitted dispatches; render thumbnail or "No Media Attached" placeholder
+
+## Supplied branding and link cleanup
+- [ ] Use Sierra's supplied construction-hat-and-shield image for logo and favicon
+- [ ] Audit resource links and remove error destinations
+- [ ] Verify branding and retained links
