@@ -171,7 +171,7 @@ function DistrictSelector({ field, zip, onChange }: { field: MiningField; zip: s
 function NationalFieldSelector({ field, onChange, architecture }: { field: MiningField; onChange: (field: FieldId) => void; architecture: boolean }) {
   return <section className="relative space-y-3 border-b border-border pb-5">
     {architecture && <ArchitectureBadge>{"<RegionalStateController />"}</ArchitectureBadge>}
-    <div className="flex flex-wrap items-center justify-between gap-2"><h2 className="text-sm font-semibold">Select Active National Mining Field</h2><Badge variant="outline" className="font-mono text-[9px] text-safety">TIER 01 · NATIONAL SCOPE</Badge></div>
+    <h2 className="text-sm font-semibold">Select Active National Mining Field</h2>
     <div role="group" aria-label="Select Active National Mining Field" className="grid gap-2 md:grid-cols-3">{Object.values(miningFields).map((item) => <Button key={item.id} aria-pressed={field.id === item.id} variant="outline" onClick={() => onChange(item.id)} className={cn("h-auto min-h-16 justify-start whitespace-normal border-border px-4 py-3 text-left", field.id === item.id ? "border-safety bg-safety/10 text-safety" : "bg-secondary/40 text-ink-soft")}><MapPin className="size-4 shrink-0"/><span><span className="block text-xs font-semibold">{item.name}</span><span className="mt-1 block font-mono text-[9px]">{item.region}</span></span></Button>)}</div>
     <div className="flex items-start gap-3 border-l-2 border-safety bg-secondary/40 p-4"><Landmark className="mt-0.5 size-5 shrink-0 text-safety"/><div><h3 className="text-xs font-semibold text-safety">Federal AML Funding</h3><p className="mt-1 text-sm leading-6 text-ink-soft">{field.funding}</p><p className="mt-1 text-[10px] text-muted-foreground">Pilot allocation scenario · not a live award or eligibility determination</p></div></div>
   </section>;
@@ -390,7 +390,7 @@ function MineWatchDashboard() {
           ["Federal BIL Funding Pool", "$11.3 Billion", "Total National Allocation"],
           ["Active Community Protection Engine", "3", "Independent Geologies Scaled"],
         ].map(([label,value,detail]) => <div key={label}><p className="font-mono text-[9px] uppercase text-muted-foreground">{label}</p><p className="mt-2 text-2xl font-semibold text-safety">{value}</p><p className="mt-1 text-xs text-ink-soft">{detail}</p></div>)}</div>
-        <div className="grid gap-3 py-5 md:grid-cols-[1fr_auto]"><div><p className="text-xs text-muted-foreground">MineWatch is a screening tool, not a geological inspection or coverage determination.</p><p className="mt-1 font-mono text-[9px] uppercase text-muted-foreground">Data model snapshot · October 2026 · national pilot · simulated telemetry, reports, and regional allocations</p></div><p className="text-xs text-muted-foreground">Regional context: {field.district} · {profile.place}</p></div>
+        <div className="grid gap-3 py-5 md:grid-cols-[1fr_auto]"><div><p className="text-xs text-muted-foreground">MineWatch is a screening tool, not a geological inspection or coverage determination.</p><p className="mt-1 font-mono text-[9px] uppercase text-muted-foreground">National pilot · simulated telemetry, reports, and regional allocations</p></div><p className="text-xs text-muted-foreground">Regional context: {field.district} · {profile.place}</p></div>
       </footer>
     </div>
   </main>;
