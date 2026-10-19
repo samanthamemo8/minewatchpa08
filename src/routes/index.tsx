@@ -390,7 +390,7 @@ function MineWatchDashboard() {
           ["Federal BIL Funding Pool", "$11.3 Billion", "Total National Allocation"],
           ["Active Community Protection Engine", "3", "Independent Geologies Scaled"],
         ].map(([label,value,detail]) => <div key={label}><p className="font-mono text-[9px] uppercase text-muted-foreground">{label}</p><p className="mt-2 text-2xl font-semibold text-safety">{value}</p><p className="mt-1 text-xs text-ink-soft">{detail}</p></div>)}</div>
-        <div className="grid gap-3 py-5 md:grid-cols-[1fr_auto]"><div><p className="text-xs text-muted-foreground">MineWatch is a screening tool, not a geological inspection or coverage determination.</p><p className="mt-1 font-mono text-[9px] uppercase text-muted-foreground">National pilot · simulated telemetry, reports, and regional allocations</p></div><p className="text-xs text-muted-foreground">Regional context: {field.district} · {profile.place}</p></div>
+        <div className="grid gap-3 py-5 md:grid-cols-[1fr_auto]"><div><p className="text-xs text-muted-foreground">MineWatch is a screening tool, not a geological inspection or coverage determination.</p><p className="mt-1 font-mono text-[9px] uppercase text-muted-foreground">Data model snapshot · Live Active Version · national pilot · simulated telemetry, reports, and regional allocations</p></div><p className="text-xs text-muted-foreground">Regional context: {field.district} · {profile.place}</p></div>
       </footer>
     </div>
   </main>;
