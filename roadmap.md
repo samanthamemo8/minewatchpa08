@@ -50,4 +50,6 @@
 - [x] Remove the "TIER 01 · NATIONAL SCOPE" badge from the mining-field selector
 - [x] Remove the "Data model snapshot · October 2026" line from the footer
 - [x] Verify both removals in the rendered page and in the footer screenshot
+- [x] Restore the footer model line opening as "Data model snapshot · Live Active Version" and verify it renders
+
 
