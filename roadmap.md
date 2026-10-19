@@ -45,3 +45,9 @@
 ## Header logo matches the favicon
 - [x] Publish the hat-only mark as the CDN header logo and drop the shield variant from the header
 - [x] Verify the header and browser tab show identical hat artwork on transparent backgrounds
+
+## Scope label and footer date cleanup
+- [x] Remove the "TIER 01 · NATIONAL SCOPE" badge from the mining-field selector
+- [x] Remove the "Data model snapshot · October 2026" line from the footer
+- [x] Verify both removals in the rendered page and in the footer screenshot
+
