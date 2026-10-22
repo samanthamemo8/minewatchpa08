@@ -365,10 +365,11 @@ function MineWatchDashboard() {
       <header className="no-print mine-panel relative rounded-lg border border-border">
         {architecture && <ArchitectureBadge>{"<StateProvider />"}</ArchitectureBadge>}
         <div className="flex flex-wrap items-center justify-between gap-4 p-4 sm:p-5">
-          <div className="flex min-w-0 items-center gap-3"><img src="/favicon-hat.png" alt="MineWatch construction hat" width={48} height={48} className="size-12 shrink-0 object-contain"/><div className="min-w-0"><h1 className="text-2xl font-bold">Mine<span className="text-safety">Watch</span></h1><p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider font-mono">
-  PA-08 Civic Infrastructure Initiative • Student Framework Update
+          <div className="flex min-w-0 items-center gap-3"><img src="/favicon-hat.png" alt="MineWatch construction hat" width={48} height={48} className="size-12 shrink-0 object-contain"/><div className="min-w-0"><h1 className="text-2xl font-bold"> Mine<span className="text-safety"> Watch</span></h1>
+<p className="text-xs text-muted-foreground mt-1 uppercase tracking-wider font-mono">
+  District {field.district} Civic Infrastructure Initiative • Student Update
 </p>
-<p className="text-[11px] font-medium text-ink-soft">{field.district} District Infrastructure Pilot</p><p className="mt-1 font-mono text-[9px] uppercase text-muted-foreground">National Infrastructure Pilot</p></div></div>
+</div></div>
           <div className="flex w-full flex-wrap items-center gap-3 lg:w-auto lg:justify-end">
             <Button variant="outline" disabled={syncing} onClick={syncFeed} title="Simulated federal telemetry refresh" className="h-auto min-h-10 max-w-full whitespace-normal border-safety/40 py-2 text-xs text-safety">{syncing ? <LoaderCircle className="size-4 shrink-0 animate-spin"/> : <Network className="size-4 shrink-0"/>}{syncing ? "Streaming Federal GIS Arrays..." : "Sync USGS Satellite Feed"}</Button>
             <div className="flex items-center gap-2"><Label htmlFor="developer-view" className="text-[10px] text-muted-foreground">Developer Architecture View</Label><Switch id="developer-view" aria-label="Developer Architecture View" checked={architecture} onCheckedChange={setArchitecture}/></div>
